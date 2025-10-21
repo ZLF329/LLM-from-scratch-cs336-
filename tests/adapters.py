@@ -17,7 +17,7 @@ from cs336_basics.PositionwiseFeedForward import PositionwiseFeedForward
 from cs336_basics.RotaryPositionalEmbedding import RotaryPositionalEmbedding
 from cs336_basics.Attention import softmax,scaled_dot_product_attention,MultiheadSelfAttention
 from cs336_basics.Transformer import Transformer,TransformerLM
-from cs336_basics.Loss import cross_entropy_loss, AdamW
+from cs336_basics.Loss import cross_entropy_loss, AdamW, cos_schedule
 
 """ from cs336_basics.Linear import Linear
 from cs336_basics.Embedding import Embedding
@@ -587,7 +587,7 @@ def run_get_lr_cosine_schedule(
     Returns:
         Learning rate at the given iteration under the specified schedule.
     """
-    raise NotImplementedError
+    return cos_schedule(it, max_learning_rate, min_learning_rate, warmup_iters, cosine_cycle_iters)
 
 
 def run_save_checkpoint(
